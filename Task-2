@@ -1,0 +1,51 @@
+# Library Management System
+library = {}
+
+def add_book(book_name):
+    library[book_name] = True  # True means the book is available
+    print(f"Book '{book_name}' added to the library.")
+
+def lend_book(book_name):
+    if book_name in library and library[book_name]:
+        library[book_name] = False  # Mark the book as lent
+        print(f"Book '{book_name}' lent successfully.")
+    elif book_name in library:
+        print(f"Book '{book_name}' is already lent out.")
+    else:
+        print(f"Book '{book_name}' not found in the library.")
+
+def return_book(book_name):
+    if book_name in library:
+        library[book_name] = True  # Mark the book as available
+        print(f"Book '{book_name}' returned successfully.")
+    else:
+        print(f"Book '{book_name}' does not belong to this library.")
+
+def display_books():
+    if not library:
+        print("No books in the library.")
+        return
+    for book, available in library.items():
+        status = "Available" if available else "Lent Out"
+        print(f"{book}: {status}")
+
+# Menu-driven program
+while True:
+    print("\n1. Add Book\n2. Lend Book\n3. Return Book\n4. Display Books\n5. Exit")
+    choice = input("Enter your choice: ")
+    if choice == "1":
+        book_name = input("Enter book name: ")
+        add_book(book_name)
+    elif choice == "2":
+        book_name = input("Enter book name: ")
+        lend_book(book_name)
+    elif choice == "3":
+        book_name = input("Enter book name: ")
+        return_book(book_name)
+    elif choice == "4":
+        display_books()
+    elif choice == "5":
+        print("Exiting program.")
+        break
+    else:
+        print("Invalid choice. Please try again.")
